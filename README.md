@@ -35,7 +35,3 @@ Aplicación que muestra películas y programas de televisión consumiendo la inf
 
 - _Full responsive_.
 - _Loguear_ usuarios a través de su cuenta en Google.
-
-### Pledu
-
-Hacé [_click_ acá](https://pledu.plataforma5.la/bootcamp/omdb/solo%20week-581874b7) para acceder al módulo correspondiente en Pledu.
