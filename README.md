@@ -4,23 +4,14 @@
 
 ### Objetivos
 
-En este proyecto, crearás una aplicación que muestre películas y programas de televisión. Para eso, consumirás la información de la API de [_The Movie Database_ (TMDB)](https://www.themoviedb.org/).
-
-Para armar el _front-end_, aplicarás lo aprendido hasta ahora.
-
-Para el _back-end_, deberás configurar una base de datos y construir las funcionalidades detalladas a continuación.
-
+Aplicación que muestra películas y programas de televisión consumiendo la información de la API de [_The Movie Database_ (TMDB)](https://www.themoviedb.org/).
 ⚠️ **Importante**: La información de los usuarios deberá **persistir** en el _back-end_.
 
 ### ¿Qué Debe Tener Tu Aplicación?
 
-👩‍🏫👨‍🏫 Para armar la aplicación trabajaremos con el [**método MoSCoW**](https://www.itdo.com/blog/moscow-que-es-y-como-priorizar-en-el-desarrollo-de-tu-aplicacion/), una técnica que sirve para determinar prioridades de forma estratégica y ordenada.
+👩‍🏫👨‍🏫 Para armar la aplicación trabajé con  [**método MoSCoW**](https://www.itdo.com/blog/moscow-que-es-y-como-priorizar-en-el-desarrollo-de-tu-aplicacion/), una técnica que sirve para determinar prioridades de forma estratégica y ordenada.
 
-En este sentido, deberás enfocarte primero en las funcionalidades _Must Have_ (de prioridad alta) antes de avanzar a funcionalidades _Should Have_ (prioridad media).
-
-### Requisitos
-
-👩‍🏫👨‍🏫 Para este proyecto, enfocate en completar las tareas de **prioridad alta** y **media**. Considerá las de **prioridad normal** y **baja** como un desafío para desarrollar tu portfolio.
+### Funcionalidades
 
 📕 **Prioridad Alta** (_Must Have_)
 
