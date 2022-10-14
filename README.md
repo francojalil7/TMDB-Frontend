@@ -1,8 +1,6 @@
-# 26 - TMDB
+TMDB
 
 ![logop5](https://p5-hall-of-fame.s3.amazonaws.com/p5logo.png)
-
-### Objetivos
 
 Aplicación que muestra películas y programas de televisión consumiendo la información de la API de [_The Movie Database_ (TMDB)](https://www.themoviedb.org/).
 ⚠️ **Importante**: La información de los usuarios deberá **persistir** en el _back-end_.
