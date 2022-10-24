@@ -14,11 +14,13 @@ import {
   useDisclosure,
   useColorModeValue,
   Heading,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
+import {motion } from "framer-motion"
 
 
 const Links = [
@@ -52,11 +54,14 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const user = { name: "no hay" };
+
   return (
-    <div className={navStyles.mobileNav}>
+    <Box className={navStyles.mobileNav} w="100%">
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
+          <HStack spacing={8} alignItems={"center"}  >
             <Box display={{ base: "flex", md: "none" }}>
               <Menu>
                 <MenuButton
@@ -89,33 +94,38 @@ export default function Navbar() {
             </HStack>
             <ColorModeSwitcher />
           </HStack>
-          <Flex alignItems={"center"}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDNJbc8se31c5elVFS8lDzvZteW3c07LClvNaVzi3OfA&s"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu>
-          </Flex>
+          {user.name === "" ? (
+            <Flex alignItems={"center"}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                >
+                  <Avatar
+                    size={"sm"}
+                    src={
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDNJbc8se31c5elVFS8lDzvZteW3c07LClvNaVzi3OfA&s"
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Link 1</MenuItem>
+                  <MenuItem>Link 2</MenuItem>
+                  <MenuDivider />
+                  <MenuItem>Link 3</MenuItem>
+                </MenuList>
+              </Menu>
+            </Flex>
+          ) : (
+            <ButtonGroup variant="outline" spacing="6">
+              <Button colorScheme="pink" as={motion.button} whileTap={{ scale: 0.8 }} whileHover={{ scale: 1.1 }}>Login</Button>
+              <Button as={motion.button} whileTap={{ scale: 0.8 }} whileHover={{ scale: 1.1 }}>Register</Button>
+            </ButtonGroup>
+          )}
         </Flex>
       </Box>
-
-      {/* <Box p={4}>Main Content Here</Box> */}
-    </div>
+    </Box>
   );
 }

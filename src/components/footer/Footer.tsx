@@ -15,7 +15,7 @@ export default function LargeWithLogoCentered() {
       color={useColorModeValue("gray.700", "gray.200")}
       w="100%"
     >
-      <Box py={10}>
+      <Box py={5}>
         <Flex
           align={"center"}
           _before={{
