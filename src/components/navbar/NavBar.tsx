@@ -13,7 +13,6 @@ import {
   MenuDivider,
   useDisclosure,
   useColorModeValue,
-  Stack,
   Heading,
   ButtonGroup,
 } from "@chakra-ui/react";
@@ -22,6 +21,8 @@ import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
 import {motion } from "framer-motion"
+
+
 const Links = [
   {
     name: "Home",
@@ -53,7 +54,9 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const user = { name: "no hay" };
+
   return (
     <Box className={navStyles.mobileNav} w="100%">
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
