@@ -19,8 +19,7 @@ import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+
 
 const Links = [
   {
@@ -53,8 +52,6 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useDispatch();
-  dispatch()
   return (
     <div className={navStyles.mobileNav}>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>

@@ -1,6 +1,7 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
-interface User {
+export interface User {
   name: string;
   lastname: string;
   email: string;
@@ -13,10 +14,16 @@ const initialState: User = {
   email: "",
   id: "",
 };
-const setUser = createAction<User>("SET_USER");
 
-export const reducer = createReducer(initialState, (builder) => {
-  builder.addCase(setUser, (state, action) => {
-    console.log(state, action.payload);
-  });
+export const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<User>) => {
+      return action.payload;
+    },
+  },
 });
+export const { setUser } = userSlice.actions;
+export const getUser = (state: RootState) => state.user;
+export default userSlice.reducer;
