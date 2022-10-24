@@ -20,8 +20,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
-import {motion } from "framer-motion"
-
+import { motion } from "framer-motion";
 
 const Links = [
   {
@@ -55,13 +54,13 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const user = { name: "no hay" };
+  const user = { name: "" };
 
   return (
-    <Box className={navStyles.mobileNav} w="100%">
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+    <Box m="auto" className={navStyles.mobileNav} w="100%" bg={useColorModeValue("gray.100", "gray.900")}>
+      <Box m="auto" px={4} maxWidth="1180px">
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}  >
+          <HStack spacing={8} alignItems={"center"}>
             <Box display={{ base: "flex", md: "none" }}>
               <Menu>
                 <MenuButton
@@ -79,8 +78,10 @@ export default function Navbar() {
                 </MenuList>
               </Menu>
             </Box>
+            <Link to="/">
+              <Heading m="0 auto" fontSize={{base:"0.8rem",lg:"2rem",xl:"3rem"}}>TMDB</Heading>
+            </Link>
 
-            <Heading>TMDB</Heading>
             <HStack
               as={"nav"}
               spacing={4}
@@ -94,7 +95,7 @@ export default function Navbar() {
             </HStack>
             <ColorModeSwitcher />
           </HStack>
-          {user.name === "" ? (
+          {user.name !== "" ? (
             <Flex alignItems={"center"}>
               <Menu>
                 <MenuButton
@@ -119,9 +120,28 @@ export default function Navbar() {
               </Menu>
             </Flex>
           ) : (
-            <ButtonGroup variant="outline" spacing="6">
-              <Button colorScheme="pink" as={motion.button} whileTap={{ scale: 0.8 }} whileHover={{ scale: 1.1 }}>Login</Button>
-              <Button as={motion.button} whileTap={{ scale: 0.8 }} whileHover={{ scale: 1.1 }}>Register</Button>
+            <ButtonGroup variant="outline" spacing="3">
+              <Link to="/login">
+                <Button
+                  colorScheme="pink"
+                  as={motion.button}
+                  whileTap={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.1 }}
+                  m="0"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button
+                  as={motion.button}
+                  whileTap={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.1 }}
+                  m="0"
+                >
+                  Register
+                </Button>
+              </Link>
             </ButtonGroup>
           )}
         </Flex>
