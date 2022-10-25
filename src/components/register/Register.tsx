@@ -16,10 +16,32 @@ import {
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { useForm, Resolver } from "react-hook-form";
+import { register } from "../../interfaces/forms.interfaces";
+
+const resolver: Resolver<register> = async (values) => {
+  return {
+    values: values.email ? values : {},
+    errors: !values.email
+      ? {
+          email: {
+            type: "required",
+            message: "This is required.",
+          },
+        }
+      : {},
+  };
+};
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+  } = useForm<register>({ resolver });
+  const onSubmit = handleSubmit((data) => {
+    console.log("🚀 ~ file: Register.tsx ~ line 44 ~ onSubmit ~ data", data);
+  });
   return (
     <Flex
       minH={"81vh"}
@@ -47,24 +69,24 @@ export default function Register() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" {...register("name")} />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" {...register("lastname")}/>
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" {...register("email")}/>
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input type={showPassword ? "text" : "password"} {...register("password")} />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -86,6 +108,7 @@ export default function Register() {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={onSubmit}
               >
                 Sign up
               </Button>
