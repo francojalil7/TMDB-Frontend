@@ -9,21 +9,21 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useForm, Resolver } from "react-hook-form";
+import { login } from "../../interfaces/forms.interfaces";
+import { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-type FormValues = {
-  email: string;
-  password: string;
-};
-
-const resolver: Resolver<FormValues> = async (values) => {
+const resolver: Resolver<login> = async (values) => {
   return {
     values: values.email ? values : {},
     errors: !values.email
       ? {
-        email: {
+          email: {
             type: "required",
             message: "This is required.",
           },
@@ -32,12 +32,16 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-
 export default function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+  } = useForm<login>({ resolver });
   const onSubmit = handleSubmit((data) => {
-    console.log("🚀 ~ file: Login.tsx ~ line 39 ~ Login ~ data", data)
-  })
+    console.log("🚀 ~ file: Login.tsx ~ line 39 ~ Login ~ data", data);
+  });
   return (
     <Flex
       minH={"81vh"}
@@ -61,11 +65,23 @@ export default function Login() {
           <Stack spacing={4} onSubmit={onSubmit}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email"{...register("email")}  />
+              <Input type="email" {...register("email")} />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" {...register("password")}/>
+              <InputGroup>
+                <Input type={showPassword ? "text" : "password"} {...register("password")} />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <Stack spacing={10}>
               <Button
