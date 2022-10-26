@@ -17,6 +17,8 @@ import { useForm, Resolver } from "react-hook-form";
 import { login } from "../../interfaces/forms.interfaces";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useAppDispatch } from "../../hooks/store.hooks";
+import { sendLoginRequest } from "../../state/user";
 
 const resolver: Resolver<login> = async (values) => {
   return {
@@ -34,13 +36,10 @@ const resolver: Resolver<login> = async (values) => {
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-  } = useForm<login>({ resolver });
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm<login>({ resolver });
   const onSubmit = handleSubmit((data) => {
-    console.log("🚀 ~ file: Login.tsx ~ line 39 ~ Login ~ data", data);
+    dispatch(sendLoginRequest(data))
   });
   return (
     <Flex
@@ -70,7 +69,10 @@ export default function Login() {
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} {...register("password")} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password")}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}

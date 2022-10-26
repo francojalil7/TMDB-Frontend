@@ -15,9 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Resolver } from "react-hook-form";
 import { register } from "../../interfaces/forms.interfaces";
+import axios from "axios";
 
 const resolver: Resolver<register> = async (values) => {
   return {
@@ -35,13 +36,15 @@ const resolver: Resolver<register> = async (values) => {
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    register,
-    handleSubmit,
-  } = useForm<register>({ resolver });
+  const { register, handleSubmit } = useForm<register>({ resolver });
+  const navigate = useNavigate();
+
   const onSubmit = handleSubmit((data) => {
-    console.log("🚀 ~ file: Register.tsx ~ line 44 ~ onSubmit ~ data", data);
+    axios
+      .post("http://localhost:3001/auth/register", data)
+      .then(() => navigate("/"));
   });
+
   return (
     <Flex
       minH={"81vh"}
@@ -75,18 +78,21 @@ export default function Register() {
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" {...register("lastname")}/>
+                  <Input type="text" {...register("lastname")} />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" {...register("email")}/>
+              <Input type="email" {...register("email")} />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} {...register("password")} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password")}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}

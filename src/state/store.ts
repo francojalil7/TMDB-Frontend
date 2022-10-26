@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import user from "./user";
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
