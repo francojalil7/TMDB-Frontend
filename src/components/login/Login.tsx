@@ -15,10 +15,10 @@ import {
 import { Link } from "react-router-dom";
 import { useForm, Resolver } from "react-hook-form";
 import { login } from "../../interfaces/forms.interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../../hooks/store.hooks";
-import { sendLoginRequest } from "../../state/user";
+import { sendLoginRequest,addUser } from "../../state/user";
 
 const resolver: Resolver<login> = async (values) => {
   return {
@@ -37,10 +37,22 @@ const resolver: Resolver<login> = async (values) => {
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
+  const [user, setUser] = useState({});
   const { register, handleSubmit } = useForm<login>({ resolver });
   const onSubmit = handleSubmit((data) => {
-    dispatch(sendLoginRequest(data))
+    dispatch(sendLoginRequest(data));
   });
+  const checkUser = ()=>{
+    const item = window.localStorage.getItem("user");
+    if(item){
+      setUser(JSON.parse(item))
+      dispatch(addUser(JSON.parse(item)))
+    } 
+  }
+  useEffect(() => {
+    checkUser()
+  }, []);
+
   return (
     <Flex
       minH={"81vh"}

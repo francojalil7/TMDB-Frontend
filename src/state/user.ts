@@ -11,7 +11,6 @@ export interface User {
 }
 export  const sendLoginRequest = createAsyncThunk("user/login",async ({email,password}: login)=>{
   const response = await axios.post("http://localhost:3001/auth/login",{email,password})
-    console.log("🚀 ~ file: user.ts ~ line 14 ~ sendLoginRequest ~ response", response)
     return response.data;
 })
 const initialState: User = {
@@ -25,19 +24,20 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
+    addUser: (state, action: PayloadAction<User>) => {
       return action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(sendLoginRequest.fulfilled, (state, action) => {
-      console.log(action.payload)
       localStorage.setItem('token', action.payload.token);
-      return action.payload.user
+      localStorage.setItem('user', JSON.stringify(action.payload.payload));
+      
+      return action.payload.payload
     });
   },
 });
-export const { setUser } = userSlice.actions;
+export const { addUser } = userSlice.actions;
 export const getUser = (state: RootState) => state.user;
 export default userSlice.reducer;
 
