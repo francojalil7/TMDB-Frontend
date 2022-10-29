@@ -21,6 +21,9 @@ import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
 import { motion } from "framer-motion";
+import useCheckUser from "../../hooks/useCheckUser";
+import { useAppDispatch } from "../../hooks/store.hooks";
+import { sendLogOutRequest } from "../../state/user";
 
 const Links = [
   {
@@ -53,11 +56,20 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { checkUser, user } = useCheckUser();
+  const dispatch = useAppDispatch();
 
-  const user = { name: "" };
+  const logOutRequest = () => {
+    dispatch(sendLogOutRequest())
+  };
 
   return (
-    <Box m="auto" className={navStyles.mobileNav} w="100%" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box
+      m="auto"
+      className={navStyles.mobileNav}
+      w="100%"
+      bg={useColorModeValue("gray.100", "gray.900")}
+    >
       <Box m="auto" px={4} maxWidth="1180px">
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
@@ -79,7 +91,12 @@ export default function Navbar() {
               </Menu>
             </Box>
             <Link to="/">
-              <Heading m="0 auto" fontSize={{base:"0.8rem",lg:"2rem",xl:"3rem"}}>TMDB</Heading>
+              <Heading
+                m="0 auto"
+                fontSize={{ base: "0.8rem", lg: "2rem", xl: "3rem" }}
+              >
+                TMDB
+              </Heading>
             </Link>
 
             <HStack
@@ -95,7 +112,7 @@ export default function Navbar() {
             </HStack>
             <ColorModeSwitcher />
           </HStack>
-          {user.name !== "" ? (
+          {user !== "" ? (
             <Flex alignItems={"center"}>
               <Menu>
                 <MenuButton
@@ -115,7 +132,7 @@ export default function Navbar() {
                   <MenuItem>Link 1</MenuItem>
                   <MenuItem>Link 2</MenuItem>
                   <MenuDivider />
-                  <MenuItem>Link 3</MenuItem>
+                  <MenuItem onClick={logOutRequest}>Log out</MenuItem>
                 </MenuList>
               </Menu>
             </Flex>
