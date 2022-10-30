@@ -8,11 +8,11 @@ import Register from "./components/register/Register";
 import useCheckUser from "./hooks/useCheckUser";
 
 function App() {
-  const {checkUser,user} = useCheckUser();
+  const {checkUser} = useCheckUser();
   
   useEffect(() => {
     checkUser()
-  }, []);
+  });
 
   return (
     <>
