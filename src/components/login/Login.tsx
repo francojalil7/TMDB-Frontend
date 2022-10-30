@@ -12,7 +12,7 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Resolver } from "react-hook-form";
 import { login } from "../../interfaces/forms.interfaces";
 import { useEffect, useState } from "react";
@@ -38,10 +38,13 @@ const resolver: Resolver<login> = async (values) => {
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+
   const {checkUser,user} = useCheckUser();
   const { register, handleSubmit } = useForm<login>({ resolver });
   const onSubmit = handleSubmit((data) => {
     dispatch(sendLoginRequest(data));
+    if(user) navigate("/")
   });
 
 

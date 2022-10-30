@@ -6,6 +6,8 @@ import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import useCheckUser from "./hooks/useCheckUser";
+import { getUser } from "./state/user";
+import { useAppSelector } from "./hooks/store.hooks";
 
 function App() {
   const {checkUser} = useCheckUser();
