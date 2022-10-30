@@ -10,11 +10,11 @@ import { getUser } from "./state/user";
 import { useAppSelector } from "./hooks/store.hooks";
 
 function App() {
-  const { checkUser, user } = useCheckUser();
-  const usuario = useAppSelector(getUser);
+  const {checkUser} = useCheckUser();
+  
   useEffect(() => {
-    checkUser();
-  }, []);
+    checkUser()
+  });
 
   return (
     <>
