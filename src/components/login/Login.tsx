@@ -47,7 +47,6 @@ export default function Login() {
     if(user) navigate("/")
   });
 
-
   useEffect(() => {
     checkUser()
   }, []);

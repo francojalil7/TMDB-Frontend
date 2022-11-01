@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -15,6 +15,11 @@ import {
   useColorModeValue,
   Heading,
   ButtonGroup,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
@@ -22,8 +27,8 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
 import { motion } from "framer-motion";
 import useCheckUser from "../../hooks/useCheckUser";
-import { useAppDispatch } from "../../hooks/store.hooks";
-import { sendLogOutRequest } from "../../state/user";
+import { useAppDispatch, useAppSelector } from "../../hooks/store.hooks";
+import { getUser, sendLogOutRequest } from "../../state/user";
 
 const Links = [
   {
@@ -36,7 +41,7 @@ const Links = [
   },
   {
     name: "Series",
-    path: "/series/",
+    path: "/series",
   },
 ];
 
@@ -56,11 +61,11 @@ const NavLink = ({ children, path }: { children: ReactNode; path: string }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { checkUser, user } = useCheckUser();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(getUser);
 
   const logOutRequest = () => {
-    dispatch(sendLogOutRequest())
+    dispatch(sendLogOutRequest());
   };
 
   return (
@@ -85,6 +90,35 @@ export default function Navbar() {
                 <MenuList>
                   <MenuItem>Home</MenuItem>
                   <MenuDivider />
+                  <Accordion defaultIndex={[0]} allowMultiple>
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box flex="1" textAlign="left">
+                            Movies
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        Lorem ipsum
+                      </AccordionPanel>
+                    </AccordionItem>
+
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box flex="1" textAlign="left">
+                            Series
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        Lorem ipsum 
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
                   <MenuItem>Movies</MenuItem>
                   <MenuItem>Series</MenuItem>
                 </MenuList>
@@ -112,7 +146,7 @@ export default function Navbar() {
             </HStack>
             <ColorModeSwitcher />
           </HStack>
-          {user !== "" ? (
+          {user?.email ? (
             <Flex alignItems={"center"}>
               <Menu>
                 <MenuButton
