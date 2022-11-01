@@ -5,14 +5,14 @@ import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import useCheckUser from "./hooks/useCheckUser";
-import Grid from "./components/grid/Grid";
+import Series from "./components/series/Series";
 
 function App() {
-  const {checkUser} = useCheckUser();
-  
+  const { checkUser } = useCheckUser();
+
   useEffect(() => {
-    checkUser()
-  },[]);
+    checkUser();
+  }, []);
 
   return (
     <>
@@ -21,8 +21,7 @@ function App() {
         <Route path="/"></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/series" element={<Grid/>}></Route>
-        <Route path="/movies" element={<Grid/>}></Route>
+        <Route path="/series" element={<Series />}></Route>
       </Routes>
       <Footer />
     </>

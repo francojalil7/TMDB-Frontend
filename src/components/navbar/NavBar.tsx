@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import {
   Box,
   Flex,
@@ -15,18 +15,12 @@ import {
   useColorModeValue,
   Heading,
   ButtonGroup,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import navStyles from "./NavBar.module.css";
 import { motion } from "framer-motion";
-import useCheckUser from "../../hooks/useCheckUser";
 import { useAppDispatch, useAppSelector } from "../../hooks/store.hooks";
 import { getUser, sendLogOutRequest } from "../../state/user";
 
@@ -90,37 +84,28 @@ export default function Navbar() {
                 <MenuList>
                   <MenuItem>Home</MenuItem>
                   <MenuDivider />
-                  <Accordion defaultIndex={[0]} allowMultiple>
-                    <AccordionItem>
-                      <h2>
-                        <AccordionButton>
-                          <Box flex="1" textAlign="left">
-                            Movies
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel pb={4}>
-                        Lorem ipsum
-                      </AccordionPanel>
-                    </AccordionItem>
-
-                    <AccordionItem>
-                      <h2>
-                        <AccordionButton>
-                          <Box flex="1" textAlign="left">
-                            Series
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel pb={4}>
-                        Lorem ipsum 
-                      </AccordionPanel>
-                    </AccordionItem>
-                  </Accordion>
-                  <MenuItem>Movies</MenuItem>
-                  <MenuItem>Series</MenuItem>
+                  <Box
+                    px={2}
+                    py={1}
+                    rounded={"md"}
+                    _hover={{
+                      textDecoration: "none",
+                      bg: useColorModeValue("gray.200", "gray.700"),
+                    }}
+                  >
+                    <Link to={"/movies"}>Movies</Link>
+                  </Box>
+                  <Box
+                    px={2}
+                    py={1}
+                    rounded={"md"}
+                    _hover={{
+                      textDecoration: "none",
+                      bg: useColorModeValue("gray.200", "gray.700"),
+                    }}
+                  >
+                    <Link to={"/series"}>Series</Link>
+                  </Box>
                 </MenuList>
               </Menu>
             </Box>
