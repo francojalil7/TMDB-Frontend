@@ -1,4 +1,4 @@
-import { Box, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Image, Kbd, Stack, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Serie } from "../interfaces/serie.interface";
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Card = ({ serie }: Props) => {
-  const releaseDate = serie.first_air_date.slice(0, 4);
+  const releaseDate = serie.first_air_date?.slice(0, 4) || "0000";
   const { name } = serie;
   const MotionStack = motion(Stack);
 
@@ -22,7 +22,12 @@ const Card = ({ serie }: Props) => {
       exit={{ opacity: 0, scale: 0 }}
       layout
     >
-      <Text fontSize={"1rem"}>{name.slice(0, 27)}</Text>
+      <Text fontSize={"1rem"} color="black" bgGradient="linear(to-r, white, black)">
+        {name.slice(0, 27)}
+      </Text>
+      <span>
+        <Kbd>{releaseDate}</Kbd>
+      </span>
       <Box>
         <Image
           src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`}
@@ -33,6 +38,7 @@ const Card = ({ serie }: Props) => {
           overflow="hidden"
           position={"relative"}
           whileHover={{ scale: 1.02 }}
+          borderRadius="2px"
         />
       </Box>
     </MotionStack>

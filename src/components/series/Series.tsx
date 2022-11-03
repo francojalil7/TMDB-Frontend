@@ -1,5 +1,6 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Heading,
   Input,
@@ -13,64 +14,61 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Card from "../../commons/Card";
-import { Serie } from "../../interfaces/serie.interface";
+import useSeries from "../../hooks/useSeries";
 
 export default function Series() {
-  const [series, setSeries] = useState<Serie[]>([]);
+  const { series, handlerSerie, handlerSearch } = useSeries();
+  useEffect(() => {}, [series, handlerSerie]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+    formState: { isSubmitSuccessful },
+  } = useForm();
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/series").then(({ data }) => {
-      setSeries(data);
-    });
-  }, []);
-  const handlerClick = (event: React.MouseEvent<HTMLElement,MouseEvent>) => {
-    console.log(event.currentTarget.className.includes("populares"));
-    
-    console.log(event.currentTarget.className.includes("mejores valoradas"));
-  };
+  const search = handleSubmit((data) => {
+    handlerSearch(data.search);
+  });
+
   return (
     <Stack maxWidth="1180px" m="0 auto" p="1rem 1rem" alignItems="center">
       <Heading>Series Online</Heading>
       <InputGroup size="md" maxWidth={"300px"}>
-        <Input pr="4.5rem" placeholder="Search..." />
+        <Input pr="4.5rem" placeholder="Search..." {...register("search")} />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm">
+          <Button h="1.75rem" size="sm" onClick={search} >
             <SearchIcon />
           </Button>
         </InputRightElement>
       </InputGroup>
       <Tabs m="0 auto">
         <TabList>
-          <Tab className="populares" onClick={handlerClick}>Populares</Tab>
-          <Tab className="mejores valoradas" onClick={handlerClick}>Mejores Valoradas</Tab>
+          <Tab className="populares" onClick={handlerSerie}>
+            Populares
+          </Tab>
+          <Tab className="mejores valoradas" onClick={handlerSerie}>
+            Mejores Valoradas
+          </Tab>
         </TabList>
-
-        <TabPanels>
-          <TabPanel
-            display={"flex"}
-            flexDir={{ base: "column", md: "row" }}
-            flexWrap="wrap"
-            alignContent={"center"}
-            justifyContent="center"
-            m="0 auto"
-          >
-            {series.length > 0 ? (
-              series.map((serie) => <Card serie={serie} />)
-            ) : (
-              <Spinner size="xl" />
-            )}
-          </TabPanel>
-          <TabPanel>
-            <Spinner size="xl" />
-          </TabPanel>
-          <TabPanel>
-            <Spinner size="xl" />
-          </TabPanel>
-        </TabPanels>
       </Tabs>
+      <Box
+        display={"flex"}
+        flexDir={{ base: "column", md: "row" }}
+        flexWrap="wrap"
+        alignContent={"center"}
+        justifyContent="center"
+        m="0 auto"
+      >
+        {series.length > 0 ? (
+          series.map((serie) => <Card key={serie.id} serie={serie} />)
+        ) : (
+          <Spinner size="xl" />
+        )}
+      </Box>
     </Stack>
   );
 }
