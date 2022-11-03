@@ -3,16 +3,17 @@ import { motion } from "framer-motion";
 import { Serie } from "../interfaces/serie.interface";
 interface Props {
   serie: Serie;
+  h?: string;
+  hImg?: string;
 }
 
-const Card = ({ serie }: Props) => {
+const Card = ({ serie, h, hImg }: Props) => {
   const releaseDate = serie.first_air_date?.slice(0, 4) || "0000";
   const { name } = serie;
   const MotionStack = motion(Stack);
 
   return (
     <MotionStack
-      w="260px"
       m="3px"
       backgroundImage={`https://image.tmdb.org/t/p/w500${serie.backdrop_path}`}
       borderRadius="6px"
@@ -21,8 +22,13 @@ const Card = ({ serie }: Props) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0 }}
       layout
+      h={h || "auto"}
     >
-      <Text fontSize={"1rem"} color="black" bgGradient="linear(to-r, white, black)">
+      <Text
+        fontSize={"1rem"}
+        color="black"
+        bgGradient="linear(to-r, white, black)"
+      >
         {name.slice(0, 27)}
       </Text>
       <span>
@@ -34,11 +40,13 @@ const Card = ({ serie }: Props) => {
           alt="Dan Abramov"
           as={motion.img}
           w="auto"
+          m="0 auto"
           maxHeight={"100%"}
           overflow="hidden"
           position={"relative"}
           whileHover={{ scale: 1.02 }}
           borderRadius="2px"
+          h={hImg || "22rem"}
         />
       </Box>
     </MotionStack>

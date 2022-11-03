@@ -6,6 +6,8 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import useCheckUser from "./hooks/useCheckUser";
 import Series from "./components/series/Series";
+import Slider from "./components/Slider";
+import Home from "./pages/Home";
 
 function App() {
   const { checkUser } = useCheckUser();
@@ -18,7 +20,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/"></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/series" element={<Series />}></Route>
