@@ -24,10 +24,13 @@ export default function Series() {
   useEffect(() => {
     axios.get("http://localhost:3001/series").then(({ data }) => {
       setSeries(data);
-      console.log("🚀 ~ file: Series.tsx ~ line 25 ~ axios.get ~ data", data);
     });
   }, []);
-
+  const handlerClick = (event: React.MouseEvent<HTMLElement,MouseEvent>) => {
+    console.log(event.currentTarget.className.includes("populares"));
+    
+    console.log(event.currentTarget.className.includes("mejores valoradas"));
+  };
   return (
     <Stack maxWidth="1180px" m="0 auto" p="1rem 1rem" alignItems="center">
       <Heading>Series Online</Heading>
@@ -41,16 +44,8 @@ export default function Series() {
       </InputGroup>
       <Tabs m="0 auto">
         <TabList>
-          <Tab
-            name="Estrenos"
-            onClick={(e) => {
-              console.log(e.target.dispatchEvent);
-            }}
-          >
-            Estrenos
-          </Tab>
-          <Tab>Populares</Tab>
-          <Tab>Mejores Valoradas</Tab>
+          <Tab className="populares" onClick={handlerClick}>Populares</Tab>
+          <Tab className="mejores valoradas" onClick={handlerClick}>Mejores Valoradas</Tab>
         </TabList>
 
         <TabPanels>
