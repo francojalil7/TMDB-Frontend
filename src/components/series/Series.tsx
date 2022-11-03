@@ -1,5 +1,10 @@
+import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Button,
   Heading,
+  Input,
+  InputGroup,
+  InputRightElement,
   Spinner,
   Stack,
   Tab,
@@ -9,12 +14,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import axios from "axios";
-import {
-  MouseEventHandler,
-  ReactEventHandler,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import Card from "../../commons/Card";
 import { Serie } from "../../interfaces/serie.interface";
 
@@ -31,12 +31,24 @@ export default function Series() {
   return (
     <Stack maxWidth="1180px" m="0 auto" p="1rem 1rem" alignItems="center">
       <Heading>Series Online</Heading>
-
+      <InputGroup size="md" maxWidth={"300px"}>
+        <Input pr="4.5rem" placeholder="Search..." />
+        <InputRightElement width="4.5rem">
+          <Button h="1.75rem" size="sm">
+            <SearchIcon />
+          </Button>
+        </InputRightElement>
+      </InputGroup>
       <Tabs m="0 auto">
         <TabList>
-          <Tab name="Estrenos" onClick={(e)=>{
-            console.log(e.target.dispatchEvent)
-          }}>Estrenos</Tab>
+          <Tab
+            name="Estrenos"
+            onClick={(e) => {
+              console.log(e.target.dispatchEvent);
+            }}
+          >
+            Estrenos
+          </Tab>
           <Tab>Populares</Tab>
           <Tab>Mejores Valoradas</Tab>
         </TabList>

@@ -1,12 +1,12 @@
 import { Box, Image, Stack, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import React from "react";
 import { Serie } from "../interfaces/serie.interface";
 interface Props {
   serie: Serie;
 }
 
 const Card = ({ serie }: Props) => {
+  const releaseDate = serie.first_air_date.slice(0, 4);
   const { name } = serie;
   const MotionStack = motion(Stack);
 
