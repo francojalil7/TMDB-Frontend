@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Card from "../../commons/Card";
+import Card from "../../commons/CardSerie";
 import useSeries from "../../hooks/useSeries";
 
 export default function Series() {
