@@ -8,6 +8,7 @@ import useCheckUser from "./hooks/useCheckUser";
 import Series from "./components/series/Series";
 import Slider from "./components/Slider";
 import Home from "./pages/Home";
+import Movies from "./components/Movies";
 
 function App() {
   const { checkUser } = useCheckUser();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/series" element={<Series />}></Route>
+        <Route path="/movies" element={<Movies />}></Route>
       </Routes>
       <Footer />
     </>

@@ -7,7 +7,7 @@ interface Props {
   hImg?: string;
 }
 
-const Card = ({ serie, h, hImg }: Props) => {
+const CardSerie = ({ serie, h, hImg }: Props) => {
   const releaseDate = serie.first_air_date?.slice(0, 4) || "0000";
   const { name } = serie;
   const MotionStack = motion(Stack);
@@ -36,7 +36,7 @@ const Card = ({ serie, h, hImg }: Props) => {
       </span>
       <Box>
         <Image
-          src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500${serie.poster_path}` || "../assets/notImg.png"}
           alt="Dan Abramov"
           as={motion.img}
           w="auto"
@@ -53,4 +53,4 @@ const Card = ({ serie, h, hImg }: Props) => {
   );
 };
 
-export default Card;
+export default CardSerie;

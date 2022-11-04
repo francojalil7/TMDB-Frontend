@@ -1,9 +1,8 @@
+import useMovies from "../hooks/useMovies";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-    
-  )
-}
+  const { movies } = useMovies();
+  return <div>Home</div>;
+};
 
-export default Home
+export default Home;
