@@ -26,6 +26,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/series" element={<Series />}></Route>
         <Route path="/movies" element={<Movies />}></Route>
+        <Slider/>
       </Routes>
       <Footer />
     </>
