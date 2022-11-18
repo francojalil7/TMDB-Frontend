@@ -35,13 +35,13 @@ const MovieSerie = ({ movie, h, hImg }: Props) => {
       <span>
         <Kbd>{releaseDate}</Kbd>
       </span>
-      <Box>
+      <Box w="264px">
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}` || "../assets/notImg.png"}
           alt="Dan Abramov"
           as={motion.img}
-          w="auto"
-          m="0 auto"
+          w="260px"
+          m="5px"
           maxHeight={"100%"}
           overflow="hidden"
           position={"relative"}

@@ -10,8 +10,6 @@ import {
   Stack,
   Tab,
   TabList,
-  TabPanel,
-  TabPanels,
   Tabs,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
@@ -25,13 +23,12 @@ export default function Series() {
   const {
     register,
     handleSubmit,
-    reset,
-    formState,
     formState: { isSubmitSuccessful },
   } = useForm();
 
   const search = handleSubmit((data) => {
-    handlerSearch(data.search);
+    console.log("🚀 ~ file: Series.tsx ~ line 30 ~ search ~ data", data)
+    
   });
 
   return (

@@ -1,8 +1,11 @@
+import Slider from "../components/Slider";
 import useMovies from "../hooks/useMovies";
 
 const Home = () => {
   const { movies } = useMovies();
-  return <div>Home</div>;
+  console.log("🚀 ~ file: Home.tsx ~ line 5 ~ Home ~ movies", movies);
+
+  return <Slider movies={movies}/>;
 };
 
 export default Home;

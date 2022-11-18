@@ -12,18 +12,28 @@ import {
   TabList,
   Tabs,
 } from "@chakra-ui/react";
-import Card from "../commons/CardSerie";
+import { useForm } from "react-hook-form";
+import CardMovie from "../commons/CardMovie";
 import useMovies from "../hooks/useMovies";
 
 const Movies = () => {
-  const { movies, handleMovie } = useMovies();
+  const { movies, handleMovie,handlerSearch } = useMovies();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = useForm();
+  const search = handleSubmit((data) => {
+    handlerSearch(data.search);
+  });
   return (
     <Stack maxWidth="1180px" m="0 auto" p="1rem 1rem" alignItems="center">
       <Heading>Películas Online</Heading>
       <InputGroup size="md" maxWidth={"300px"}>
-        <Input pr="4.5rem" placeholder="Search..." />
+        <Input pr="4.5rem" placeholder="Search..." {...register("search")} />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm">
+          <Button h="1.75rem" size="sm" onClick={search}>
             <SearchIcon />
           </Button>
         </InputRightElement>
@@ -48,7 +58,12 @@ const Movies = () => {
         alignContent={"center"}
         justifyContent="center"
         m="0 auto"
-      ></Box>
+      >
+        {movies.length < 1 && <Spinner size="xl" />}
+        {movies.map((movie) => (
+          <CardMovie key={movie.title} movie={movie} />
+        ))}
+      </Box>
     </Stack>
   );
 };
