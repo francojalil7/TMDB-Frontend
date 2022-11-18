@@ -4,7 +4,8 @@ import axios from "axios";
 
 export const useSeries = () => {
   const [series, setSeries] = useState<Serie[]>([]);
-
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  
   useEffect(() => {
     axios.get("http://localhost:3001/series").then(({ data }) => {
       setSeries(data);
@@ -26,7 +27,7 @@ export const useSeries = () => {
   };
   const handlerSearch = async (data: string) => {
     const reportes = await axios.get(
-      `https://api.themoviedb.org/3/search/tv?api_key=7dd7db54fa86953d0e5fe4c6383cf566&language=es&page=1&query=${data}&include_adult=false`
+      `https://api.themoviedb.org/3/search/tv?${API_KEY}&language=es&page=1&query=${data}&include_adult=false`
     );
     setSeries(reportes.data.results);
   };

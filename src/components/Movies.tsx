@@ -13,11 +13,13 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import CardMovie from "../commons/CardMovie";
 import useMovies from "../hooks/useMovies";
 
 const Movies = () => {
   const { movies, handleMovie,handlerSearch } = useMovies();
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -26,7 +28,9 @@ const Movies = () => {
   } = useForm();
   const search = handleSubmit((data) => {
     handlerSearch(data.search);
+    navigate(`/result/${data.search}`)
   });
+
   return (
     <Stack maxWidth="1180px" m="0 auto" p="1rem 1rem" alignItems="center">
       <Heading>Películas Online</Heading>
