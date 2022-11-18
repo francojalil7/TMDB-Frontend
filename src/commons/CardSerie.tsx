@@ -1,6 +1,7 @@
 import { Box, Image, Kbd, Stack, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Serie } from "../interfaces/serie.interface";
+import notImg from "../assets/notImg.png"
 interface Props {
   serie: Serie;
   h?: string;
@@ -36,10 +37,10 @@ const CardSerie = ({ serie, h, hImg }: Props) => {
       </span>
       <Box>
         <Image
-          src={`https://image.tmdb.org/t/p/w500${serie.poster_path}` || "../assets/notImg.png"}
-          alt="Dan Abramov"
+          src={serie.poster_path ?`https://image.tmdb.org/t/p/w500${serie.poster_path}` : notImg}
+          alt="Imagen Serie"
           as={motion.img}
-          w="auto"
+          w="250px"
           m="0 auto"
           maxHeight={"100%"}
           overflow="hidden"

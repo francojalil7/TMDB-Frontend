@@ -10,16 +10,26 @@ export const useMovies = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?${API_KEY}&language=es&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=7dd7db54fa86953d0e5fe4c6383cf566&language=es&page=1`
       )
-      .then(({ data }) => setMovies(data.results));
+      .then(({ data }) => {
+        return setMovies(data.results);
+      });
   }, []);
 
   const handleMovie = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (event.currentTarget.className.includes("populares")) {
-      axios.get("http://localhost:3001/series").then((res) => {
-        setMovies(res.data);
-      });
+      axios
+        .get(
+          "https://api.themoviedb.org/3/movie/popular?api_key=7dd7db54fa86953d0e5fe4c6383cf566&language=es&page=1"
+        )
+        .then(({ data }) => {
+          console.log(
+            "🚀 ~ file: useMovies.ts ~ line 28 ~ axios.get ~ data",
+            data
+          );
+          setMovies(data.results);
+        });
     }
 
     if (event.currentTarget.className.includes("mejores valoradas")) {
@@ -32,8 +42,8 @@ export const useMovies = () => {
         .get(
           `https://api.themoviedb.org/3/movie/popular?${API_KEY}&language=es&page=1`
         )
-        .then(({data}) => {
-          setMovies(data.results)
+        .then(({ data }) => {
+          setMovies(data.results);
         });
     }
   };

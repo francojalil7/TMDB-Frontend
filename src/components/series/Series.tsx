@@ -40,7 +40,7 @@ export default function Series() {
       <InputGroup size="md" maxWidth={"300px"}>
         <Input pr="4.5rem" placeholder="Search..." {...register("search")} />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={search} >
+          <Button h="1.75rem" size="sm" onClick={search}>
             <SearchIcon />
           </Button>
         </InputRightElement>

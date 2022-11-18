@@ -12,7 +12,7 @@ const Slider = () => {
         drag="x"
         dragConstraints={{ right: 0, left: -10 }}
       >
-        {/* <Card h="20rem" hImg="15rem"/> */}
+        
       </MotionBox>
     </Box>
   );

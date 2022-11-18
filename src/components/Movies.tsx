@@ -30,8 +30,12 @@ const Movies = () => {
       </InputGroup>
       <Tabs m="0 auto">
         <TabList>
-          <Tab className="populares">Populares</Tab>
-          <Tab className="mejores valoradas">Mejores Valoradas</Tab>
+          <Tab className="populares" onClick={handleMovie}>
+            Populares
+          </Tab>
+          <Tab className="mejores valoradas" onClick={handleMovie}>
+            Mejores Valoradas
+          </Tab>
           <Tab className="proximamente" onClick={handleMovie}>
             Próximamente
           </Tab>
@@ -44,9 +48,7 @@ const Movies = () => {
         alignContent={"center"}
         justifyContent="center"
         m="0 auto"
-      >
-        
-      </Box>
+      ></Box>
     </Stack>
   );
 };

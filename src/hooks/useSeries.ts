@@ -26,9 +26,9 @@ export const useSeries = () => {
   };
   const handlerSearch = async (data: string) => {
     const reportes = await axios.get(
-      `http://localhost:3001/series/search/${data}`
+      `https://api.themoviedb.org/3/search/tv?api_key=7dd7db54fa86953d0e5fe4c6383cf566&language=es&page=1&query=${data}&include_adult=false`
     );
-    setSeries(reportes.data);
+    setSeries(reportes.data.results);
   };
   return { series, handlerSerie, handlerSearch };
 };
