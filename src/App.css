@@ -1,0 +1,16 @@
+.slider {
+    width: 30vh;
+    margin: 5px;
+    border-radius: 15px;
+    padding: 3px;
+    cursor: grab;
+}   
+.slider img {
+    max-width: 15vh;
+    border-radius: 15px;
+    box-shadow: 2px 2px  10px black;
+}
+.slider h2 {
+    font-weight: bold;
+}
+

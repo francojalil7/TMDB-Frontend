@@ -1,6 +1,6 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import CardMovie from "../commons/CardMovie";
+import CardSlider from "../commons/CardSlider";
 import { Movie } from "../interfaces/movie.interface";
 interface Props {
   movies: Movie[];
@@ -8,15 +8,15 @@ interface Props {
 const Slider = ({ movies }: Props) => {
   const MotionBox = motion(Box);
   return (
-    <Box m="0 auto" overflowX="hidden" maxWidth={"1050px"} h="auto">
+    <Box m="0 auto" overflowX="hidden" maxWidth={"1050px"} >
       <MotionBox
         display="flex"
         curson="grab"
         drag="x"
-        dragConstraints={{ right: 0, left: -3000 }}
+        dragConstraints={{ right: 0, left: -1600 }}
       >
         {movies.map((movie) => (
-          <img src={movie.poster_path} />
+          <CardSlider key={movie.title} movie={movie}/>
         ))}
       </MotionBox>
     </Box>  
