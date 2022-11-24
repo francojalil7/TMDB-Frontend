@@ -9,10 +9,6 @@ export const useSearch = () => {
   useEffect(() => {}, [results]);
 
   const handlerSearch = (data?: string) => {
-    console.log(
-      "🚀 ~ file: useSearch.ts ~ line 12 ~ handlerSearch ~ data",
-      data
-    );
     if (data) {
       axios
         .get(
@@ -20,7 +16,7 @@ export const useSearch = () => {
         )
         .then(({ data }) => {
           setResults(data.results);
-          setIsLoading(false)
+          setIsLoading(false);
         });
     }
   };
@@ -28,7 +24,7 @@ export const useSearch = () => {
   return {
     results,
     handlerSearch,
-    isLoading
+    isLoading,
   };
 };
 

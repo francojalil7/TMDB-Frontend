@@ -5,10 +5,7 @@ interface Props {
   result: Result;
 }
 const CardResult = ({ result }: Props) => {
-  console.log(
-    "🚀 ~ file: CardResult.tsx ~ line 8 ~ CardResult ~ result",
-    result
-  );
+ 
   return (
     <Stack
       h="330px"
