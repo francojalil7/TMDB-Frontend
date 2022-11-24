@@ -41,15 +41,15 @@ export const useMovies = () => {
     }
   };
 
-  const handlerSearch = async (data: string) => {
+  const handlerSearchMovie = async (data: string) => {
     const reportes = await axios.get(
       `https://api.themoviedb.org/3/search/movie?${API_KEY}&language=es&query=${data}=1&include_adult=false`
     );
-    
+
     setMovies(reportes.data.results);
   };
 
-  return { movies, handleMovie, handlerSearch };
+  return { movies, handleMovie, handlerSearchMovie };
 };
 
 export default useMovies;
