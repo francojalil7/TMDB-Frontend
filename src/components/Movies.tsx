@@ -18,7 +18,7 @@ import CardMovie from "../commons/CardMovie";
 import useMovies from "../hooks/useMovies";
 
 const Movies = () => {
-  const { movies, handleMovie,handlerSearch } = useMovies();
+  const { movies, handleMovie,handlerSearchMovie } = useMovies();
   const navigate = useNavigate()
   const {
     register,
@@ -27,7 +27,7 @@ const Movies = () => {
     formState: { isSubmitSuccessful },
   } = useForm();
   const search = handleSubmit((data) => {
-    handlerSearch(data.search);
+    handlerSearchMovie(data.search);
     navigate(`/result/${data.search}`)
   });
 

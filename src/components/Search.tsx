@@ -13,15 +13,15 @@ import { Movie } from "../interfaces/movie.interface";
 import "../App.css";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useForm } from "react-hook-form";
-import useMovies from "../hooks/useMovies";
 import { useNavigate } from "react-router-dom";
+import useSearch from "../hooks/useSearch";
 interface Props {
   movies: Movie[];
 }
 const Search = ({ movies }: Props) => {
   const [index, setIndex] = useState(0);
   const [valueSearch, setValueSearch] = useState("");
-  const { handlerSearch } = useMovies();
+  const { results } = useSearch();
   const navigate = useNavigate();
   const {
     register,
@@ -39,17 +39,14 @@ const Search = ({ movies }: Props) => {
 
   const search = handleSubmit((data) => {
     console.log("🚀 ~ file: Search.tsx ~ line 38 ~ search ~ data", data);
-    // handlerSearch(data.search);
-    // navigate(`/result/${data.search}`);
+    
+    navigate(`/result/${data.search}`);
   });
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
-
     if (event.key === "Enter") {
       event.preventDefault();
       event.stopPropagation();
-      console.log("SEARCH VALUE", valueSearch);
-      // handlerSearch(valueSearch);
-    navigate(`/result/${valueSearch}`);
+      navigate(`/result/${valueSearch}`);
     }
   };
 
@@ -84,9 +81,8 @@ const Search = ({ movies }: Props) => {
           borderRadius="50px"
           _placeholder={{ color: "black" }}
           onKeyDown={onKeyDown}
-          onChange={(e)=>{
-            console.log(e.currentTarget.value)
-            setValueSearch(e.currentTarget.value)
+          onChange={(e) => {
+            setValueSearch(e.currentTarget.value);
           }}
           value={valueSearch}
         />
