@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <Box maxWidth={"1050px"} m="0 auto">
       <Search movies={movies}/>
-      <Heading marginTop={"1.2rem"}>Lo más popular</Heading>
+      <Heading marginTop={"1rem"}>Lo más popular</Heading>
       <Slider movies={movies} />
     </Box>
   );
