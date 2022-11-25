@@ -62,8 +62,8 @@ const Search = ({ movies }: Props) => {
       p="1rem"
       justifyContent={"center"}
     >
-      <Heading>Bienvenidos</Heading>
-      <Text fontSize={"2rem"}>
+      <Heading color="white">Bienvenidos</Heading>
+      <Text fontSize={"2rem"} color="white">
         Millones de películas, programas de televisión y personas por descubrir.
         Explora ahora.
       </Text>
